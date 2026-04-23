@@ -99,8 +99,7 @@ export default function Spread() {
             </div>
             <p className="pull">
               Sent a screenshot on a Monday, had a sewout on Wednesday, wore{" "}
-              <em>the hats on Saturday.</em> That&apos;s it. That&apos;s the
-              story.
+              <em>the hats on Saturday.</em>
             </p>
             <div className="attribution">Tournament org · River Hills Open</div>
 
