@@ -6,41 +6,54 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 type Photo = { src: string; alt: string; wide?: boolean };
 
+// Each row must total exactly 12 cols (wide=8, regular=4).
+// Rows: [w+r]=12, [r+w]=12, [r+r+r]=12. Never [r+r+w] — that pushes wide to next row with a gap.
 const PHOTOS: Photo[] = [
+  // Row 1 — 8+4=12
   { src: "/images/web/ja-hats.jpg",        alt: "Jackson Academy hat run",          wide: true },
   { src: "/images/web/IMG_9076.jpeg",       alt: "Hats on the bench" },
+  // Row 2 — 4+4+4=12
   { src: "/images/web/sevenoaks-trio.jpg",  alt: "Seven Oaks apparel trio" },
   { src: "/images/web/IMG_8836.jpeg",       alt: "Polos and shirts" },
   { src: "/images/web/rhc-green.jpg",       alt: "River Hills green hat" },
+  // Row 3 — 4+8=12
   { src: "/images/web/jps-polos.jpg",       alt: "JPS staff polos" },
   { src: "/images/web/beanies.jpg",         alt: "Knit beanie bulk run",             wide: true },
+  // Row 4 — 4+4+4=12
   { src: "/images/web/leather-bag.jpg",     alt: "Embroidered leather tote" },
   { src: "/images/web/IMG_0364.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/IMG_0563.jpeg",       alt: "Embroidery work" },
+  // Row 5 — 4+4+4=12
   { src: "/images/web/rhsc-navy.jpg",       alt: "RHSC navy hats" },
   { src: "/images/web/slews-hat.jpg",       alt: "Slews hat" },
+  { src: "/images/web/rys-hat.jpg",         alt: "RYS hat" },
+  // Row 6 — 8+4=12
   { src: "/images/web/realsouth-hats.jpg",  alt: "Real South hats",                  wide: true },
   { src: "/images/web/IMG_0568.jpeg",       alt: "Embroidery work" },
+  // Row 7 — 4+4+4=12
   { src: "/images/web/IMG_0583.jpeg",       alt: "Embroidery work" },
-  { src: "/images/web/rys-hat.jpg",         alt: "RYS hat" },
   { src: "/images/web/emmys-hat.jpg",       alt: "Emmy's embroidered hat" },
   { src: "/images/web/abneys-apron.jpg",    alt: "Abney's embroidered apron" },
+  // Row 8 — 4+8=12
   { src: "/images/web/IMG_0765.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/IMG_0802.jpeg",       alt: "Embroidery work",                  wide: true },
+  // Row 9 — 4+4+4=12
   { src: "/images/web/sevenoaks-shirt.jpg", alt: "Seven Oaks performance shirt" },
   { src: "/images/web/IMG_0806.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/production.jpg",      alt: "Teams production run" },
+  // Row 10 — 4+4+4=12
   { src: "/images/web/riverhills-navy.jpg", alt: "River Hills navy hat" },
   { src: "/images/web/IMG_0843.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/IMG_8380.jpeg",       alt: "Embroidery work" },
+  // Row 11 — 4+8=12
   { src: "/images/web/IMG_8830.jpeg",       alt: "Embroidery work" },
-  { src: "/images/web/IMG_9371.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/IMG_9554.jpeg",       alt: "Embroidery work",                  wide: true },
+  // Row 12 — 4+4+4=12
+  { src: "/images/web/IMG_9371.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/IMG_9974.jpeg",       alt: "Embroidery work" },
   { src: "/images/web/IMG_9983.jpeg",       alt: "Embroidery work" },
+  // Row 13 — 4+8=12
   { src: "/images/web/detail-1.jpg",        alt: "Embroidery close-up detail" },
-  { src: "/images/web/detail-2.jpg",        alt: "Embroidery close-up detail" },
-  { src: "/images/web/detail-3.jpg",        alt: "Embroidery close-up detail" },
   { src: "/images/web/machine-2.jpg",       alt: "Tajima multi-head machine",        wide: true },
 ];
 
