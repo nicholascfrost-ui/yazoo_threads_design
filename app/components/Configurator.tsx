@@ -96,7 +96,7 @@ export default function Configurator() {
       <div className="wrap cfg-inner">
         <div className="s-head">
           <div className="mark">
-            <div className="num">§ 05 / 05</div>
+            <div className="num">§ 04 / 04</div>
           </div>
           <div>
             <h2>Start a <em>quote request.</em></h2>

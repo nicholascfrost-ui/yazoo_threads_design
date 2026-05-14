@@ -36,15 +36,12 @@ export default function Hero() {
       gsap.set(".word-inner",        { y: "105%" });
       gsap.set(".hero-panel .lede",  { opacity: 0, y: 18 });
       gsap.set(".hero-actions",      { opacity: 0, y: 14 });
-      gsap.set(".hero-side",         { opacity: 0, x: 32 });
-
       const tl = gsap.timeline({ defaults: { ease: "power4.out" }, delay: 0.15 });
       tl.to(".hero-top",            { y: 0, opacity: 1, duration: 0.8 });
       tl.to(".hero-panel",          { opacity: 1, y: 0, duration: 0.9 }, "-=0.5");
       tl.to(".word-inner",          { y: "0%", duration: 0.75, stagger: 0.05, ease: "power3.out" }, "-=0.6");
       tl.to(".hero-panel .lede",    { y: 0, opacity: 1, duration: 0.75 }, "-=0.3");
       tl.to(".hero-actions",        { y: 0, opacity: 1, duration: 0.65 }, "-=0.45");
-      tl.to(".hero-side",           { x: 0, opacity: 1, duration: 1, ease: "power3.out" }, "-=0.85");
     }, section);
 
     return () => ctx.revert();
@@ -94,20 +91,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <aside className="hero-side">
-            <div className="hero-side-h">
-              <span>Now on the Frames</span>
-              <span>Live</span>
-            </div>
-            <div className="hero-side-title">On the Tajimas</div>
-            <div className="mono-sm" style={{ color: "rgba(255,255,255,.7)" }}>
-              Six-head run · Production floor · Jackson, MS
-            </div>
-            <div className="hero-side-meta">
-              <span>Multi-head Tajima</span>
-              <span>Commercial grade</span>
-            </div>
-          </aside>
+
         </div>
       </div>
     </section>

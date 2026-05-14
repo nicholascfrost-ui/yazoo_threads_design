@@ -43,7 +43,7 @@ export default function Popup() {
           scrollTrigger: { trigger: root, start: "top 75%", once: true },
         }
       );
-      gsap.from(root.querySelectorAll(".popup-step"), {
+      gsap.from(root.querySelectorAll(".popup-side .popup-step"), {
         x: 24,
         opacity: 0,
         duration: 0.8,
@@ -55,6 +55,18 @@ export default function Popup() {
           once: true,
         },
       });
+      gsap.from(root.querySelectorAll(".garment-steps .popup-step"), {
+        x: 24,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.12,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: root.querySelector(".garment-steps"),
+          start: "top 80%",
+          once: true,
+        },
+      });
     }, root);
     return () => ctx.revert();
   }, []);
@@ -62,6 +74,49 @@ export default function Popup() {
   return (
     <section className="s popup" id="how" ref={rootRef}>
       <div className="wrap">
+        <div style={{ marginBottom: "clamp(48px, 6vw, 80px)" }}>
+          <div
+            className="mono"
+            style={{ color: "rgba(255,255,255,.75)", marginBottom: 16 }}
+          >
+            How It Works · Standard Orders
+          </div>
+          <h2>Your logo. <em>Your way.</em></h2>
+          <p>
+            Two ways to work with us — bring your own garments or let us handle
+            the ordering. Either way, we take it from there.
+          </p>
+          <div className="popup-steps garment-steps" style={{ marginTop: 24, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            <div className="popup-step">
+              <span className="idx">01</span>
+              <div>
+                <h4>You supply, we stitch.</h4>
+                <p>
+                  Already have your shirts, hats or gear? Drop them off or ship
+                  them to us. We&apos;ll digitize your logo and have them back to
+                  you stitched and ready.
+                </p>
+              </div>
+            </div>
+            <div className="popup-step">
+              <span className="idx">02</span>
+              <div>
+                <h4>We handle the order.</h4>
+                <p>
+                  Don&apos;t have garments yet? No problem. We source from our
+                  wholesale vendors — Richardson, Yupoong, KATI and more — so
+                  you get the right blank and the right stitch in one order.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div style={{ marginTop: 28 }}>
+            <a href="#quote" className="btn btn-cream">
+              Start a Quote <Arrow />
+            </a>
+          </div>
+        </div>
+
         <div className="popup-grid">
           <div>
             <div

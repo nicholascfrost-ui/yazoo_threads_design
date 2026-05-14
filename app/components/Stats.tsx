@@ -50,15 +50,6 @@ export default function Stats() {
           <span className="l">Order Minimum</span>
         </div>
         <div className="stat">
-          <span className="n">
-            <span data-counter data-count="4">
-              0
-            </span>
-            <span className="u">–6 hr</span>
-          </span>
-          <span className="l">Digitizing Turnaround</span>
-        </div>
-        <div className="stat">
           <span className="n" style={{ fontFamily: "var(--serif-display)" }}>
             Any
             <span className="u" style={{ marginLeft: "6px" }}>

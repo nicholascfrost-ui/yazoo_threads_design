@@ -172,7 +172,7 @@ export default function FieldGuide() {
       <div className="wrap">
         <div className="s-head">
           <div className="mark">
-            <div className="num">§ 04 / 05</div>
+            <div className="num">§ 03 / 04</div>
           </div>
           <div>
             <h2>
