@@ -17,8 +17,8 @@ export default function Home() {
       <ScrollFix />
       <Nav />
       <Hero />
-      <Manifesto />
       <Stats />
+      <Manifesto />
       <Marquee />
       <FieldGuide />
       <Configurator />

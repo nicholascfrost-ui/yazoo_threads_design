@@ -9,7 +9,6 @@ type Entry = {
   wide?: boolean;
   img: string;
   alt: string;
-  tag: string;
   no: string;
   h: React.ReactNode;
   p: string;
@@ -19,9 +18,9 @@ type Entry = {
 const entries: Entry[] = [
   {
     wide: true,
-    img: "/images/web/ja-hats.jpg",
-    alt: "Jackson Academy hat run",
-    tag: "Feature № 01",
+    img: "/images/web/IMG_9076.jpeg",
+    alt: "Hats and caps",
+
     no: "Entry I · Headwear",
     h: (
       <>
@@ -32,9 +31,9 @@ const entries: Entry[] = [
     foot: "RICH 112 · YP 6006 · KATI LC5M",
   },
   {
-    img: "/images/web/jps-polos.jpg",
-    alt: "Polos",
-    tag: "Feature № 02",
+    img: "/images/web/IMG_8836.jpeg",
+    alt: "Polos and shirts",
+
     no: "Entry II · Apparel",
     h: (
       <>
@@ -47,7 +46,7 @@ const entries: Entry[] = [
   {
     img: "/images/web/leather-bag.jpg",
     alt: "Leather tote",
-    tag: "Feature № 03",
+
     no: "Entry III · Goods",
     h: (
       <>
@@ -60,7 +59,7 @@ const entries: Entry[] = [
   {
     img: "/images/web/sevenoaks-shirt.jpg",
     alt: "Performance fleece",
-    tag: "Feature № 04",
+
     no: "Entry IV · Outerwear",
     h: (
       <>
@@ -72,30 +71,16 @@ const entries: Entry[] = [
   },
   {
     img: "/images/web/production.jpg",
-    alt: "Teams production",
-    tag: "Feature № 05",
-    no: "Entry V · Schools & teams",
+    alt: "Schools and team pop-up shops",
+
+    no: "Entry V · Programs",
     h: (
       <>
-        Schools &amp; <em>teams.</em>
+        Schools &amp; team <em>pop-up shops.</em>
       </>
     ),
-    p: "Sports, spirit, band, clubs. We scale for programs of every size and turn around for game day.",
-    foot: "Game-day turn",
-  },
-  {
-    wide: true,
-    img: "/images/web/beanies.jpg",
-    alt: "Pop-up shop",
-    tag: "Feature № 06",
-    no: "Entry VI · Programs",
-    h: (
-      <>
-        Pop-up <em>shops.</em>
-      </>
-    ),
-    p: "We build a time-limited online store for your group, collect orders over a set window, then fulfill everything in bulk — zero inventory for you.",
-    foot: "Custom storefront · Bulk fulfillment",
+    p: "Sports, spirit, band, clubs — plus custom online storefronts for groups of every size. We collect orders over a set window and fulfill everything in bulk.",
+    foot: "Game-day turn · Bulk fulfillment",
   },
 ];
 
@@ -189,10 +174,9 @@ export default function FieldGuide() {
 
         <div className="guide-grid">
           {entries.map((e) => (
-            <article key={e.tag} className={`gi${e.wide ? " wide" : ""}`}>
+            <article key={e.no} className={`gi${e.wide ? " wide" : ""}`}>
               <div className="gi-photo">
                 <img src={e.img} alt={e.alt} />
-                <span className="gi-tag">{e.tag}</span>
               </div>
               <div className="gi-body">
                 <div className="gi-no">{e.no}</div>
