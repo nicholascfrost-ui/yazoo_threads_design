@@ -6,10 +6,10 @@ import { Arrow } from "./Arrow";
 
 const NAV_LINKS = [
   { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
   { href: "#services", label: "Services" },
   { href: "#how", label: "How It Works" },
   { href: "#work", label: "Gallery" },
-  { href: "#about", label: "About" },
 ];
 
 export default function Nav() {

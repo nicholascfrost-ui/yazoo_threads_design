@@ -63,7 +63,7 @@ export default function Hero() {
 
       <div className="wrap hero-wrap">
         <div className="hero-top">
-          <div className="mono">Vol. XII — Commercial Embroidery / Jackson, Mississippi</div>
+          <div className="mono">Commercial Embroidery — Jackson, Mississippi</div>
           <div className="hero-ticker">
             <span className="pulse" />
             <span>Machines running · Studio open today</span>

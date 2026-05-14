@@ -117,6 +117,13 @@ export default function Popup() {
           </div>
         </div>
 
+        <div style={{
+          borderTop: "1px dashed rgba(255,255,255,.25)",
+          margin: "0 0 clamp(48px, 6vw, 80px)",
+          position: "relative",
+          zIndex: 2,
+        }} />
+
         <div className="popup-grid">
           <div>
             <div

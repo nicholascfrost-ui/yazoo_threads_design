@@ -39,7 +39,7 @@ export default function Stats() {
 
   return (
     <section className="strip" ref={rootRef}>
-      <div className="wrap strip-inner">
+      <div className="wrap strip-inner" style={{ gridTemplateColumns: "repeat(3, minmax(0, 1fr))", maxWidth: 840, margin: "0 auto" }}>
         <div className="stat">
           <span className="n">
             <span data-counter data-count="5">

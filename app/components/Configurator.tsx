@@ -8,6 +8,7 @@ import { Arrow } from "./Arrow";
 type Field = { label: string; value: string };
 
 const ITEM_TYPES = ["Hats & caps", "Polos & shirts", "Jackets & outerwear", "Bags & accessories", "Aprons", "Other"];
+const GARMENT_OPTIONS = ["Customer Supplied", "Yazoo Threads Wholesale"];
 const PLACEMENTS = ["Left chest", "Sleeve", "Back yoke", "Front + back", "Full back", "Not sure yet"];
 const TIMELINES = ["Standard · 7–10 days", "Priority · 3–5 days", "Rush · 48 hr", "Flexible"];
 
@@ -45,6 +46,7 @@ export default function Configurator() {
     phone: "",
     org: "",
     itemType: "",
+    garments: "",
     qty: "",
     placement: "",
     timeline: "",
@@ -80,6 +82,7 @@ export default function Configurator() {
       fields.phone && `Phone: ${fields.phone}`,
       fields.org && `Organization: ${fields.org}`,
       fields.itemType && `Item type: ${fields.itemType}`,
+      fields.garments && `Garments: ${fields.garments}`,
       fields.qty && `Quantity: ${fields.qty}`,
       fields.placement && `Placement: ${fields.placement}`,
       fields.timeline && `Timeline: ${fields.timeline}`,
@@ -167,6 +170,12 @@ export default function Configurator() {
               <div className="field" style={{ marginTop: 4 }}>
                 <div className="field-label"><span>Item type</span></div>
                 <SelectChips options={ITEM_TYPES} value={fields.itemType} onChange={set("itemType")} />
+              </div>
+
+              {/* garments */}
+              <div className="field">
+                <div className="field-label"><span>Garments</span></div>
+                <SelectChips options={GARMENT_OPTIONS} value={fields.garments} onChange={set("garments")} />
               </div>
 
               {/* quantity */}
