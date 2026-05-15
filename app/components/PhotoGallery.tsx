@@ -1,10 +1,5 @@
-"use client";
-
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
 type Photo = { src: string; alt: string; wide?: boolean };
+
 
 // Each row must total exactly 12 cols (wide=8, regular=4).
 // Rows: [w+r]=12, [r+w]=12, [r+r+r]=12. Never [r+r+w] — that pushes wide to next row with a gap.
@@ -58,53 +53,9 @@ const PHOTOS: Photo[] = [
 ];
 
 export default function PhotoGallery() {
-  const rootRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    const root = rootRef.current;
-    if (!root) return;
-    const ctx = gsap.context(() => {
-      gsap.from(root.querySelector(".gallery-heading"), {
-        y: 30,
-        opacity: 0,
-        duration: 1.0,
-        ease: "power3.out",
-        scrollTrigger: { trigger: root, start: "top 75%", once: true },
-      });
-
-      root.querySelectorAll<HTMLElement>(".pg-item").forEach((card) => {
-        const img = card.querySelector<HTMLElement>("img");
-        if (!img) return;
-        gsap.fromTo(
-          card,
-          { clipPath: "inset(0 100% 0 0)" },
-          {
-            clipPath: "inset(0 0% 0 0)",
-            duration: 1.0,
-            ease: "power3.inOut",
-            scrollTrigger: { trigger: card, start: "top 92%", once: true },
-          }
-        );
-        gsap.fromTo(
-          img,
-          { scale: 1.1 },
-          {
-            scale: 1,
-            duration: 1.0,
-            ease: "power3.inOut",
-            scrollTrigger: { trigger: card, start: "top 92%", once: true },
-          }
-        );
-      });
-    }, root);
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
       className="s"
-      ref={rootRef}
       style={{ paddingTop: "clamp(32px, 4vw, 56px)", paddingBottom: "clamp(72px, 9vw, 128px)" }}
     >
       <div className="wrap">
@@ -152,7 +103,6 @@ export default function PhotoGallery() {
                   aspectRatio: photo.wide ? "16 / 9" : "4 / 3",
                   objectFit: "cover",
                   display: "block",
-                  transition: "transform 0.8s ease",
                 }}
               />
             </div>
