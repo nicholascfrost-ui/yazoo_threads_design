@@ -94,12 +94,15 @@ export default function Configurator() {
 
     try {
       const res = await fetch("/api/send", { method: "POST", body: data });
+      const json = await res.json();
       if (res.ok) {
         setSubmitState("success");
       } else {
+        console.error("[Quote form] API error:", json);
         setSubmitState("error");
       }
-    } catch {
+    } catch (err) {
+      console.error("[Quote form] Fetch error:", err);
       setSubmitState("error");
     }
   };
