@@ -5,9 +5,9 @@ import Manifesto from "./components/Manifesto";
 import Stats from "./components/Stats";
 import Marquee from "./components/Marquee";
 import FieldGuide from "./components/FieldGuide";
+import Brands from "./components/Brands";
 import Configurator from "./components/Configurator";
 import Popup from "./components/Popup";
-import Spread from "./components/Spread";
 import PhotoGallery from "./components/PhotoGallery";
 import Footer from "./components/Footer";
 
@@ -21,9 +21,9 @@ export default function Home() {
       <Manifesto />
       <Marquee />
       <FieldGuide />
+      <Brands />
       <Configurator />
       <Popup />
-      <Spread />
       <PhotoGallery />
       <Footer />
     </>

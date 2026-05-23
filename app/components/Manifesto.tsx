@@ -63,7 +63,7 @@ export default function Manifesto() {
       <div className="wrap manifesto-inner">
         <div className="s-head">
           <div className="mark">
-            <div className="num">§ 01 / 04</div>
+            <div className="num">§ 01 / 05</div>
           </div>
           <div>
             <h2>
