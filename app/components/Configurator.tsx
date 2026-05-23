@@ -53,6 +53,7 @@ export default function Configurator() {
     notes: "",
   });
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [fileSizeError, setFileSizeError] = useState(false);
   const [submitState, setSubmitState] = useState<"idle"|"submitting"|"success"|"error">("idle");
 
   const set = (k: keyof typeof fields) => (v: string) =>
@@ -77,6 +78,7 @@ export default function Configurator() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (fileSizeError) return;
     setSubmitState("submitting");
 
     const data = new FormData();
@@ -94,11 +96,12 @@ export default function Configurator() {
 
     try {
       const res = await fetch("/api/send", { method: "POST", body: data });
-      const json = await res.json();
+      let json: Record<string, unknown> = {};
+      try { json = await res.json(); } catch { /* non-JSON body (e.g. 413 from Vercel) */ }
       if (res.ok) {
         setSubmitState("success");
       } else {
-        console.error("[Quote form] API error:", json);
+        console.error("[Quote form] API error:", res.status, json);
         setSubmitState("error");
       }
     } catch (err) {
@@ -225,14 +228,35 @@ export default function Configurator() {
                       ? uploadedFile.name
                       : "Choose file"}
                   </span>
-                  <span className="qf-upload-formats">AI · EPS · PDF · PNG · JPG</span>
+                  <span className="qf-upload-formats">PNG · JPG · PDF · SVG · max 4 MB</span>
                   <input
                     type="file"
                     accept=".ai,.eps,.pdf,.png,.jpg,.jpeg,.svg"
                     style={{ display: "none" }}
-                    onChange={(e) => setUploadedFile(e.target.files?.[0] ?? null)}
+                    onChange={(e) => {
+                      const f = e.target.files?.[0] ?? null;
+                      if (f && f.size > 4 * 1024 * 1024) {
+                        setUploadedFile(null);
+                        setFileSizeError(true);
+                        e.target.value = "";
+                      } else {
+                        setUploadedFile(f);
+                        setFileSizeError(false);
+                      }
+                    }}
                   />
                 </label>
+                {fileSizeError && (
+                  <p style={{
+                    marginTop: 6,
+                    fontFamily: "var(--mono)",
+                    fontSize: "0.7rem",
+                    color: "#c0392b",
+                    letterSpacing: "0.06em",
+                  }}>
+                    File exceeds 4 MB — please compress it, or email it directly to info@yazoothreads.com after submitting.
+                  </p>
+                )}
               </div>
 
               {/* notes */}
@@ -267,7 +291,7 @@ export default function Configurator() {
                       type="submit"
                       className="btn btn-primary"
                       style={{ width: "100%", justifyContent: "center" }}
-                      disabled={submitState === "submitting"}
+                      disabled={submitState === "submitting" || fileSizeError}
                     >
                       {submitState === "submitting" ? "Sending…" : "Send quote request"}
                       {submitState !== "submitting" && <Arrow />}
