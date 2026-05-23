@@ -53,6 +53,7 @@ export default function Configurator() {
     notes: "",
   });
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [submitState, setSubmitState] = useState<"idle"|"submitting"|"success"|"error">("idle");
 
   const set = (k: keyof typeof fields) => (v: string) =>
     setFields((f) => ({ ...f, [k]: v }));
@@ -74,24 +75,33 @@ export default function Configurator() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const lines: string[] = [
-      fields.name && `Name: ${fields.name}`,
-      fields.email && `Email: ${fields.email}`,
-      fields.phone && `Phone: ${fields.phone}`,
-      fields.org && `Organization: ${fields.org}`,
-      fields.itemType && `Item type: ${fields.itemType}`,
-      fields.garments && `Garments: ${fields.garments}`,
-      fields.qty && `Quantity: ${fields.qty}`,
-      fields.placement && `Placement: ${fields.placement}`,
-      fields.timeline && `Timeline: ${fields.timeline}`,
-      uploadedFile && `File attached: ${uploadedFile.name}`,
-      fields.notes && `Notes: ${fields.notes}`,
-    ].filter(Boolean) as string[];
+    setSubmitState("submitting");
 
-    const body = lines.join("%0A");
-    window.location.href = `mailto:info@yazoothreads.com?subject=Quote%20Request&body=${body}`;
+    const data = new FormData();
+    data.append("name",      fields.name);
+    data.append("email",     fields.email);
+    data.append("phone",     fields.phone);
+    data.append("org",       fields.org);
+    data.append("itemType",  fields.itemType);
+    data.append("garments",  fields.garments);
+    data.append("qty",       fields.qty);
+    data.append("placement", fields.placement);
+    data.append("timeline",  fields.timeline);
+    data.append("notes",     fields.notes);
+    if (uploadedFile) data.append("file", uploadedFile);
+
+    try {
+      const res = await fetch("/api/send", { method: "POST", body: data });
+      if (res.ok) {
+        setSubmitState("success");
+      } else {
+        setSubmitState("error");
+      }
+    } catch {
+      setSubmitState("error");
+    }
   };
 
   return (
@@ -234,9 +244,44 @@ export default function Configurator() {
               </div>
 
               <div style={{ marginTop: 24 }}>
-                <button type="submit" className="btn btn-primary" style={{ width: "100%", justifyContent: "center" }}>
-                  Send quote request <Arrow />
-                </button>
+                {submitState === "success" ? (
+                  <div style={{
+                    padding: "18px 24px",
+                    background: "rgba(72,128,144,0.12)",
+                    border: "1px solid var(--blue)",
+                    borderRadius: 4,
+                    fontFamily: "var(--mono)",
+                    fontSize: "0.8rem",
+                    letterSpacing: "0.08em",
+                    color: "var(--blue)",
+                    textAlign: "center",
+                  }}>
+                    Quote request sent — we&apos;ll be in touch within one business day.
+                  </div>
+                ) : (
+                  <>
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{ width: "100%", justifyContent: "center" }}
+                      disabled={submitState === "submitting"}
+                    >
+                      {submitState === "submitting" ? "Sending…" : "Send quote request"}
+                      {submitState !== "submitting" && <Arrow />}
+                    </button>
+                    {submitState === "error" && (
+                      <p style={{
+                        marginTop: 10,
+                        fontFamily: "var(--mono)",
+                        fontSize: "0.72rem",
+                        color: "#c0392b",
+                        textAlign: "center",
+                      }}>
+                        Something went wrong — please email us directly at info@yazoothreads.com
+                      </p>
+                    )}
+                  </>
+                )}
               </div>
             </form>
           </div>
