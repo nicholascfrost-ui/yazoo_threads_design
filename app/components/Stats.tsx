@@ -60,7 +60,7 @@ export default function Stats() {
         </div>
         <div className="stat">
           <span className="n">
-            <span data-counter data-count="6">
+            <span data-counter data-count="29">
               0
             </span>
             <span className="u">heads</span>
